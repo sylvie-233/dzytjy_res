@@ -1,0 +1,16 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    color: black;
+}
+
+a:link, a:hover {
+    text-decoration: none;
+}
