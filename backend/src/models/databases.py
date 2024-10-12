@@ -22,10 +22,13 @@ def get_db():
         db.close()
         
 # 创建所有表
-def create_all_tables():
+def create_all_tables() -> None:
     from .filemodel import FileModel
-    metadata = MetaData()
-    metadata.reflect(bind=engine)
-    for table in metadata.tables.values():
-        table.drop(engine)
+    # 删表重建
+    # metadata = MetaData()
+    # metadata.reflect(bind=engine)
+    # for table in metadata.tables.values():
+    #     table.drop(engine)
+        
+    # 建表
     DbModel.metadata.create_all(engine)

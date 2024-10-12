@@ -5,7 +5,10 @@ from models.databases import create_all_tables
 
 app = FastAPI()
 
-create_all_tables()
+# 根据模型创建所有表
+# create_all_tables()
+
+# 导入子路由
 app.include_router(fileRoute)
 
 
