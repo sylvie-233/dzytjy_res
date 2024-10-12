@@ -10,6 +10,7 @@ class FileModel(DbModel):
     subject = Column(String)
     grade = Column(String)
     tag = Column(String)
-    
     filepath = Column(String)
+    filetype = Column(String)
+    time = Column(String)
     

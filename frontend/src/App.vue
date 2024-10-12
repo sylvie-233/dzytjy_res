@@ -3,8 +3,10 @@
 		<div class="top">
 			<div class="top-tit">
 				<span class="xx">道县玉潭精英部资源管理平台&nbsp;-&nbsp;欢迎您</span>
-				<a class="login" href="javascript:" id="top-log">【登录】</a>
-				<a class="reg"  href="#">【注册】</a>
+				<div class="userbox">
+					<a class="login" href="javascript:" id="top-log">【登录】</a>
+					<a class="reg"  href="#">【注册】</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -34,30 +36,33 @@
 				<!--左侧菜单与轮换图开始-->
 			</div>
 			<div class="dhtop">
-				<a href="/">首页</a>
-				<a href="#">试卷</a>
+				<a href="#" class="active">试卷</a>
+				<!-- <a href="#">表格</a> -->
 			</div>
 		</div>
 	</div>
 	<div class="contentbox">
 		<div class="header">
             <span>当前位置: </span>
-            <a href="#">小学资源网</a> &gt;
+            <a href="#">玉潭精英部资源网</a> &gt;
         </div>
 		<div class="opn-menu">
 			<ul class="menu-list">
                 <li style="height: 20px;"><span>学科:</span></li>
-                <li class="active"><a href="3">全部</a></li>
-                <li><a href="#">语文</a></li>
-				<li><a href="#">数学</a></li>
-				<li><a href="#">英语</a></li> 
+                <li v-for="item, index in classList" :class="{ 
+						active: index == classListItemActiveIndex
+					}">
+					<a href="#" @click="setClassListItemActiveIndex(index)">{{ item }}</a>
+				</li>
             </ul>
 			<div class="filter-type">
                 <ul class="menu-list">
                     <li><span>类型:</span></li>
-                    <li class="active"><a href="#">全部</a></li>
-                    <li><a href="#">试卷</a></li>
-                    <li><a href="#">导学案</a></li>
+                    <li v-for="item, index in tagList" :class="{ 
+							active: index == tagListItemActiveIndex
+						}">
+						<a href="#" @click="setTagListItemActiveIndex(index)">{{ item }}</a>
+					</li>
 				</ul>
             </div>
 		</div>
@@ -74,11 +79,11 @@
 						</h3>
 						<p style="line-height:28px;">
 							<span>学科：语文</span>
-							<span>分类：小升初试题</span>
+							<span>分类：试卷</span>
+							<span>年级：高一上期</span>
 						</p>
 						<p>
 							<span>时间：2023/6/27 22:32:35</span>
-							<span>阅读次数：13</span>
 						</p>
 					</div>
 					<div class="btn-box">
@@ -95,8 +100,22 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue"
 import LogoImg from "./assets/logo.png"
 import PDFImg from "./assets/pdf.jpg"
+
+
+const classList = ref<string[]>(["全部", "语文", "数学", "英语"])
+const classListItemActiveIndex = ref<number>(0)
+const setClassListItemActiveIndex = (index: number) => {
+	classListItemActiveIndex.value = index
+}
+
+const tagList = ref<string[]>(["全部", "试卷", "导学案"])
+const tagListItemActiveIndex = ref<number>(0)
+const setTagListItemActiveIndex = (index: number) => {
+	tagListItemActiveIndex.value = index
+}
 
 </script>
 
@@ -108,14 +127,20 @@ import PDFImg from "./assets/pdf.jpg"
     height: 40px;
 	.top {
 		width: 1200px;
+		height: 100%;
 		margin-left: auto;
 		margin-right: auto;
 		font-family: "宋体";
 		font-size: 16px;
 		position: relative;
 		.top-tit {
-			float: left;
 			line-height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.userbox {
+
+			}
 		}
 		.xx {
 			color: #00b1a4;
@@ -220,6 +245,9 @@ import PDFImg from "./assets/pdf.jpg"
 			display: inline-block;
 			height: 100%;
 			&:hover {
+				background-color: #2ab3a9;
+			}
+			&.active {
 				background-color: #2ab3a9;
 			}
 		}
